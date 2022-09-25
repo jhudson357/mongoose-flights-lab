@@ -8,6 +8,35 @@ function newFlight(req, res) {
   })
 }
 
+function create(req, res) {
+  Flight.create(req.body)
+  .then(flight => {
+    console.log(flight)
+    res.redirect('/flights/index')
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/flights/new')
+  })
+}
+
+function index(req, res) {
+  console.log('INDEX IS WORKING')
+  Flight.find({})
+  .then(flights => {
+    res.render('flights/index', {
+      flights: flights,
+      title: 'All Flights',
+    })
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/flights/index')
+  })
+}
+
 export {
   newFlight as new,
+  create,
+  index,
 }

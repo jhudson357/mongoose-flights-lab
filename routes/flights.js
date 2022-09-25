@@ -5,8 +5,14 @@ import * as flightsCtrl from '../controllers/flights.js'
 
 // implicit /flights --> don't need to add /flights to routes
 
+// GET /flights
+router.get('/', flightsCtrl.index)
+
 // GET /flights/new
 router.get('/new', flightsCtrl.new)
+
+// POST /flights
+router.post('/', flightsCtrl.create)
 
 export {
   router
