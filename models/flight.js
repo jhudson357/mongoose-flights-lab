@@ -8,8 +8,15 @@ const flightSchema = new Schema({
     type: String,
     enum: ['American', 'Southwest', 'United']
   },
-  airport: String,
-  flightNo: Number,
+  airport: {
+    type: String,
+    enum: ['AUS', 'DFW', 'DEN', 'LAX', 'SAN']
+  },
+  flightNo: {
+    type: Number,
+    min: 10,
+    max: 9999,
+  },
   departs: {
     type: Date,
     default: oneYearFromNow()
