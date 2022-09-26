@@ -5,12 +5,14 @@
 <main>
   <h1><%= title %></h1>
   <form id="new-form" action="/flights" method="POST">
-    <label for="airline-select">Airline:</label>
+    <label for="airline-input">Airline:</label>
+    <input type="text" placeholder="American, Southwest, or United" name="airline" id="airline-input">
+    <!-- <label for="airline-select">Airline:</label>
     <select name="airline" id="airline-select">
       <option value="American">American</option>
       <option value="Southwest">Southwest</option>
       <option value="United">United</option>
-    </select>
+    </select> -->
     <label for="airport-select">Airport:</label>
     <select name="airport" id="airport-select">
       <option value="AUS">AUS</option>

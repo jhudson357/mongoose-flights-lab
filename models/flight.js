@@ -4,7 +4,10 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 const flightSchema = new Schema({
-  airline: String,
+  airline: {
+    type: String,
+    enum: ['American', 'Southwest', 'United']
+  },
   airport: String,
   flightNo: Number,
   departs: Date,
