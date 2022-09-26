@@ -44,14 +44,28 @@ function show(req, res) {
     })
   })
   .catch(error => {
-    console.log(error, 'create error')
+    console.log(error, 'show error')
     res.redirect('/flights')
   })
 }
+
+function deleteFlight(req, res) {
+  console.log('delete flight fxn')
+  Flight.findByIdAndDelete(req.params.id)
+  .then(flight => {
+    res.rediret('/flights')
+  })
+  .catch(error => {
+    console.log(error, 'delete error')
+    res.redirect('/flights')
+  })
+}
+
 
 export {
   newFlight as new,
   create,
   index,
   show,
+  deleteFlight as delete,
 }

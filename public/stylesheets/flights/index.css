@@ -33,3 +33,14 @@ table td {
 #list a:hover {
   background-color: white;
 }
+
+.delete-form button {
+  color: red;
+  border: none;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.delete-form button:hover {
+  color: maroon;
+}
