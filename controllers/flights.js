@@ -61,6 +61,34 @@ function deleteFlight(req, res) {
   })
 }
 
+function edit(req, res) {
+  console.log('edit controller is working!')
+  Flight.findById(req.params.id)
+  .then(flight => {
+    res.render('flights/edit', {
+      title: 'Edit Flight',
+      flight: flight,
+    })
+    console.log(flight.departs, 'FLIGHT DEPARTS INFO')
+  })
+  .catch(error => {
+    console.log(error, 'edit error')
+    res.redirect('/flights')
+  })
+}
+
+function update(req, res) {
+  console.log('update fxn running!')
+  Flight.findByIdAndUpdate(req.params.id, req.body, {new: true})
+  .then(flight => {
+    res.redirect(`/flights/${flight._id}`)
+  })
+  .catch(error => {
+    console.log(error, 'update error')
+    res.redirect('/flights')
+  })
+}
+
 
 export {
   newFlight as new,
@@ -68,4 +96,6 @@ export {
   index,
   show,
   deleteFlight as delete,
+  edit,
+  update,
 }
