@@ -17,11 +17,11 @@ function index(req, res) {
 }
 
 function newFlight(req, res) {
-  console.log('this is the new controller working!')
   const newFlight = new Flight()
   const dt = newFlight.departs
+  // console.log(dt, 'DT')
   const departsDate = dt.toISOString().slice(0,16)
-  console.log(departsDate, 'DEPARTS DATE')
+  // console.log(departsDate, 'DEPARTS DATE')
   res.render('flights/new', {
     title: 'Add Flight',
     departsDate: departsDate,
@@ -29,6 +29,10 @@ function newFlight(req, res) {
 }
 
 function create(req, res) {
+  // remove empty properties
+  for (let key in req.body) {
+    if (req.body[key] === '') delete req.body[key]
+  }
   Flight.create(req.body)
   .then(flight => {
     console.log(flight)
@@ -66,8 +70,7 @@ function deleteFlight(req, res) {
   })
 }
 
-function edit(req, res) {
-  console.log('edit controller is working!')
+function edit(req, res) { 
   Flight.findById(req.params.id)
   .then(flight => {
     res.render('flights/edit', {
@@ -83,7 +86,10 @@ function edit(req, res) {
 }
 
 function update(req, res) {
-  console.log('update fxn running!')
+  // remove empty fields
+  for (let key in req.body) {
+    if (req.body[key] === '') delete req.body[key]
+  } 
   Flight.findByIdAndUpdate(req.params.id, req.body, {new: true})
   .then(flight => {
     res.redirect(`/flights/${flight._id}`)
