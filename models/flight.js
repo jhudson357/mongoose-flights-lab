@@ -3,6 +3,19 @@ import mongoose from 'mongoose'
 // shortcut to the mongoose.Schema class
 const Schema = mongoose.Schema
 
+const ticketSchema = new Schema({
+  seat: {
+    type: String,
+    match: /[A-F][1-9]\d?/
+  },
+  price: {
+    type: Number,
+    min: 0,
+  }
+}, {
+  timestamps: true
+})
+
 const flightSchema = new Schema({
   airline: {
     type: String,
@@ -23,15 +36,16 @@ const flightSchema = new Schema({
     type: Date,
     default: oneYearFromNow()
   },
+  tickets: [ticketSchema],
 }, {
   timestamps: true
 })
 
 function oneYearFromNow() {
   const today = new Date()
-  console.log(today.getFullYear()+1, 'TODAY')
+  // console.log(today.getFullYear()+1, 'TODAY')
   today.setFullYear(today.getFullYear()+1)
-  console.log(today)
+  // console.log(today)
   return today
 }
 oneYearFromNow()
