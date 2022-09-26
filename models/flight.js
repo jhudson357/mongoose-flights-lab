@@ -10,10 +10,22 @@ const flightSchema = new Schema({
   },
   airport: String,
   flightNo: Number,
-  departs: Date,
+  departs: {
+    type: Date,
+    default: oneYearFromNow()
+  },
 }, {
   timestamps: true
 })
+
+function oneYearFromNow() {
+  const today = new Date()
+  console.log(today.getFullYear()+1, 'TODAY')
+  today.setFullYear(today.getFullYear()+1)
+  console.log(today)
+  return today
+}
+oneYearFromNow()
 
 // compile the schema into a model
 const Flight = mongoose.model('Flight', flightSchema)
