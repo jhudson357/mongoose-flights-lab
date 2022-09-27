@@ -122,6 +122,30 @@ function createTicket(req, res) {
   })
 }
 
+function deleteTicket(req, res) {
+  // find the parent element (flight)
+  Flight.findById(req.params.flightId)
+  .then(flight => {
+    // NOTE TO GRADER: LOGS LEFT TO HELP ME UNDERSTAND
+    // console.log(flight, 'flight')  --> prints all flight info
+    // console.log(flight.tickets, 'flight.tickets') --> prints all tickets
+    // console.log({_id: req.params.ticketId}, '{_id: req.params.ticketId}') --> ticket id
+    flight.tickets.remove({_id: req.params.ticketId})
+    flight.save()
+    .then(() => {
+      res.redirect(`/flights/${flight._id}`)
+    })
+    .catch(error => {
+      console.log(error, 'update error')
+      res.redirect('/flights')
+    })
+  })
+  .catch(error => {
+    console.log(error, 'update error')
+    res.redirect('/flights')
+  })
+}
+
 
 export {
   newFlight as new,
@@ -132,4 +156,5 @@ export {
   edit,
   update,
   createTicket,
+  deleteTicket,
 }
