@@ -1,7 +1,8 @@
 import { Router } from 'express'
+import * as flightsCtrl from '../controllers/flights.js'
+
 const router = Router()
 
-import * as flightsCtrl from '../controllers/flights.js'
 
 // implicit /flights --> don't need to add /flights to routes
 

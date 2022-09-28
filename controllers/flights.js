@@ -2,7 +2,6 @@
 import { Flight } from "../models/flight.js"
 
 function index(req, res) {
-  console.log('INDEX IS WORKING')
   Flight.find({})
   .then(flights => {
     res.render('flights/index', {
@@ -59,7 +58,6 @@ function show(req, res) {
 }
 
 function deleteFlight(req, res) {
-  console.log('delete flight fxn')
   Flight.findByIdAndDelete(req.params.id)
   .then(flight => {
     res.rediret('/flights')
@@ -106,7 +104,9 @@ function update(req, res) {
 function createTicket(req, res) {
   Flight.findById(req.params.id)
   .then(flight => {
+    // console.log(req.body, 'REQ.BODY') // --> req.body an obj containing the singular seat and price that you just added
     flight.tickets.push(req.body)
+    // console.log(flight.tickets)          // --> array of tickets objects
     flight.save()
     .then(() => {
       res.redirect(`/flights/${flight._id}`)
@@ -123,13 +123,15 @@ function createTicket(req, res) {
 }
 
 function deleteTicket(req, res) {
-  // find the parent element (flight)
+  // find the parent document (flight)
   Flight.findById(req.params.flightId)
   .then(flight => {
     // NOTE TO GRADER: LOGS LEFT TO HELP ME UNDERSTAND
     // console.log(flight, 'flight')  --> prints all flight info
     // console.log(flight.tickets, 'flight.tickets') --> prints all tickets
     // console.log({_id: req.params.ticketId}, '{_id: req.params.ticketId}') --> ticket id
+
+    // remove child document (ticket)
     flight.tickets.remove({_id: req.params.ticketId})
     flight.save()
     .then(() => {
