@@ -1,3 +1,20 @@
+h4 {
+  margin-top: 0;
+  border-radius: 10px;
+}
+
+#edit-btn,
+#back-btn {
+  border-radius: 5px;
+  padding: 5px;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #424748;
+  color: white;
+}
+
 ul {
   margin: 0 0 16px;
   padding: 0;

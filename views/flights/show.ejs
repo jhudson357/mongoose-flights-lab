@@ -5,17 +5,25 @@
 
 <main>
   <h1>Flight <%= flight.flightNo %></h1>
+  <h4>
+    <a href="/flights">
+      <button id="back-btn">All Flights</button>
+    </a>
+  </h4>
   <section>
-    <div>Airline: </div>
-    <div><%= flight.airline %></div>
+    <div>Airline:</div>
+    <div>
+      <%= flight.airline %>
+      <a href="/flights/<%= flight._id %>/edit">
+        <button id="edit-btn">Edit Flight</button>
+      </a>
+    </div>
     <div>Airport: </div>
     <div><%= flight.airport %></div>
     <div>Flight Number: </div>
     <div><%= flight.flightNo %></div>
     <div>Departure Date and Time: </div>
     <div><%= flight.departs %></div>
-    <div style="font-weight: bold;"><a href="/flights/<%= flight._id %>/edit">Edit Flight</a></div>
-    <div><a href="/flights">All Flights</a></div>
     <div>Meals:</div>
     <ul>
       <% flight.meals.forEach(meal => { %>

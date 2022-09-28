@@ -43,4 +43,5 @@ table td {
 
 .delete-form button:hover {
   color: maroon;
+  cursor: pointer;
 }
